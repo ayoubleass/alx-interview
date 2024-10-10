@@ -11,18 +11,18 @@ def canUnlockAll(boxes):
     Returns:
         bool: True if all boxes can be opened, False otherwise.
     """
+    if ((type(boxes)) is not list 
+    or (len(boxes)) == 0):
+        return False
     foundKeys = set()
     explore = [0]
-    while True:
+    while explore:
         current_box = explore.pop()
         if current_box in foundKeys:
             continue 
         foundKeys.add(current_box)
         for key in boxes[current_box]:
-            if key not in foundKeys and key < len(boxes):
+            if (key not in foundKeys 
+            and key < len(boxes)):
                 explore.append(key)
-        if len(foundKeys) == len(boxes):
-            break
-        if not explore:
-            break 
     return len(foundKeys) == len(boxes)

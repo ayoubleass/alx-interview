@@ -1,13 +1,15 @@
 #!/usr/bin/python3
 """
-This module has canUnlockAll function  that determines if all the boxes can be opened.
+This module has canUnlockAll function
+that determines if all the boxes can be opened.
 """
 
 
 def canUnlockAll(boxes):
     """
-    Determines if all the boxes can be opened.
-    Return boolean
+    Determines if all the boxes can be opened and returns boolean
+    Returns:
+        bool: True if all boxes can be opened, False otherwise.
     """
     foundKeys = set()
     explore = [0]
@@ -23,4 +25,4 @@ def canUnlockAll(boxes):
             break
         if not explore:
             break 
-     return len(foundKeys) == len(boxes)
+    return len(foundKeys) == len(boxes)

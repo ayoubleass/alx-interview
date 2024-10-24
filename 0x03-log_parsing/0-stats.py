@@ -26,21 +26,21 @@ if __name__ == '__main__':
     status_code = [200, 301, 400, 401, 403, 404, 405, 500]
     total_size = 0
     counter = 0
-    status_frequency = {str(code): 0 for code in status_code}
+    status_frequency = {code: 0 for code in status_code}
 
     try:
         for line in sys.stdin:
             line = line.strip()
-            match = re.match(pattern, line)
+            match = pattern.fullmatch(line)
             if match:
                 counter += 1
                 total_size += int(match.group(3))
-                code = int(match.group(2))
-                if code in status_code:
-                    status_frequency[str(code)] += 1
+                code = match.group(2)
+                if code.isdecimal():
+                    status_frequency[int(code)] += 1
                 if counter % 10 == 0:
                     show_logs(status_frequency, total_size)
             else:
                 continue
-    finally:
+    except KeyboardInterrupt:
         show_logs(status_frequency, total_size)

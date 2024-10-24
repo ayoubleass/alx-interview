@@ -38,5 +38,5 @@ if __name__ == '__main__':
                     status_frequency[str(code)] += 1
                 if counter % 10 == 0:
                     show_logs(status_frequency, total_size)
-    except KeyboardInterrupt:
+    finally:
         show_logs(status_frequency, total_size)

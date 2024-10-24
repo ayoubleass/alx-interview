@@ -12,7 +12,7 @@ def show_logs(status_frequency: dict, total_size: int) -> None:
     """
     print('File total_size: {}'.format(total_size))
     for code in sorted(status_frequency):
-        if status_frequency[code] != 0:
+        if status_frequency[code]:
             print("{}: {}".format(code, status_frequency[code]))
 
 
@@ -38,7 +38,7 @@ if __name__ == '__main__':
                 code = int(match.group(2))
                 if code in status_code:
                     status_frequency[str(code)] += 1
-                if counter == 10:
+                if counter % 10 == 0:
                     show_logs(status_frequency, total_size)
             else:
                 continue

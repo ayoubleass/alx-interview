@@ -10,14 +10,14 @@ def show_logs(status_frequency: dict, total_size: int) -> None:
     """"
     Updated regex pattern with correct groups for status code and file size
     """
-    print('File total_size:{}'.format(total_size))
+    print('File total_size: {}'.format(total_size))
     for code in sorted(status_frequency):
         if status_frequency[code] != 0:
             print("{}: {}".format(code, status_frequency[code]))
 
 
 if __name__ == '__main__':
-    pattern = (
+    pattern = re.compile(
         r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - \['
         r'(\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2}\.\d+)\] '
         r'"GET /projects/\d+ HTTP/1\.1" '
@@ -31,12 +31,11 @@ if __name__ == '__main__':
     try:
         for line in sys.stdin:
             line = line.strip()
-            data = line.split()
             match = re.match(pattern, line)
             if match:
                 counter += 1
-                total_size += int(data[-1])
-                code = int(data[-2])
+                total_size += int(match.group(3))
+                code = int(match.group(2))
                 if code in status_code:
                     status_frequency[str(code)] += 1
                 if counter % 10 == 0:

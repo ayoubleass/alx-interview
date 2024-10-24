@@ -38,7 +38,9 @@ if __name__ == '__main__':
                 code = int(match.group(2))
                 if code in status_code:
                     status_frequency[str(code)] += 1
-                if counter % 10 == 0:
+                if counter == 10:
                     show_logs(status_frequency, total_size)
+            else:
+                continue
     finally:
         show_logs(status_frequency, total_size)

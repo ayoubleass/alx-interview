@@ -26,6 +26,7 @@ if __name__ == '__main__':
     total_size = 0
     counter = 0
     status_frequency = {str(code): 0 for code in status_code}
+
     try:
         for line in sys.stdin:
             line = line.strip()
@@ -38,5 +39,5 @@ if __name__ == '__main__':
                     status_frequency[str(code)] += 1
                 if counter % 10 == 0:
                     show_logs(status_frequency, total_size)
-    finally:
+    except KeyboardInterrupt:
         show_logs(status_frequency, total_size)

@@ -12,7 +12,7 @@ def validUTF8(data):
         True if the data is valid UTF-8, False otherwise.
     """
     if not data:
-        return False
+        return True
     bytes_size = 0
     for byte in data:
         if bytes_size == 0:
